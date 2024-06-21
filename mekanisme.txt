@@ -1,0 +1,5 @@
+pada halaman dasbord kasir dapat menambahkan menu daridan masuk ke database
+jika masuk ke dalam database menu akank ditampilkan dalam menu card
+dan didalam card tersebut kasir dapat memasukan menu dan jumlah menu yang akan di pesan
+dan menu pesanan di tampilkan dalam list dan kasir, yang dapat memasukan nama pemesan dan metode pembayaran
+jika tombol bayar di klik akan masuk ke halaman struk yang dapat di cetak
