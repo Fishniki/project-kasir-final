@@ -85,7 +85,6 @@ func IndexView(db *sql.DB) func(w http.ResponseWriter, r *http.Request) {
 			orderList = append(orderList, upldOrder)
 		}
 
-		// Render index.html template with both menu and order data
 		fp := filepath.Join("view", "index.html")
 		tmpl, err := template.ParseFiles(fp)
 		if err != nil {

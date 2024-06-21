@@ -16,13 +16,7 @@ func InputToOrder(db *sql.DB) func(w http.ResponseWriter, r *http.Request) {
 			harga := r.FormValue("harga-menu_" + id)
 			jumlah := r.FormValue("jumlah_" + id)
 
-			// Debugging log untuk melihat nilai yang diterima
-			log.Println("ID:", id)
-			log.Println("ID Barang:", idBarang)
-			log.Println("Foto:", foto)
-			log.Println("Nama:", nama)
-			log.Println("Harga:", harga)
-			log.Println("Jumlah:", jumlah)
+			
 
 			// Periksa apakah idBarang sudah ada dalam database
 			var count int
