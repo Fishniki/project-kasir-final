@@ -67,19 +67,21 @@
                             <div class="px-6 py-4">
                                 <div class="flex flex-row justify-between">
                                     <div class="font-bold text-xl mb-2 whitespace-normal">{{ .Name }}</div>
+                                <!-- Jumlah -->
                                 <div class="relative flex items-center max-w-[8rem]">
-                                    <button type="button" class="bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-md p-1 h-6 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none decrement-button">
+                                    <button type="button" id="decrement-button" class=" bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-md p-1 h-6 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none ">
                                         <svg class="w-2 h-2 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16"/>
                                         </svg>
                                     </button>
-                                    <input type="text" name="jumlah_{{ .Id }}" value="1" class="bg-gray-50 border-x-0 border-gray-300 h-6 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-5 py-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 quantity-input" required />
-                                    <button type="button" class="bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-md p-1 h-6 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none increment-button">
+                                    <input type="text" value="1" name="jumlah" class="bg-gray-50 border-x-0 border-gray-300 h-6 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-5 py-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 quantity-input" required />
+                                    <button type="button" id="increment-button" class=" bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-md p-1 h-6 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none ">
                                         <svg class="w-2 h-2 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
                                         </svg>
                                     </button>
                                 </div>
+                                <!-- end jumlah -->
                                 </div>
                                 
                                 <p class="text-gray-700 text-base">
@@ -174,60 +176,37 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const navbarToggle = document.querySelector('[data-collapse-toggle="navbar-multi-level"]');
-            const navbarMenu = document.getElementById('navbar-multi-level');
+    // Mengambil tombol decrement berdasarkan ID
+    var decrementButton = document.getElementById('decrement-button');
+    if (decrementButton) {
+        decrementButton.addEventListener('click', function() {
+            var input = decrementButton.nextElementSibling; // Mengambil input setelah tombol decrement
+            var value = parseInt(input.value); // Mengubah nilai input menjadi integer
 
-            navbarToggle.addEventListener('click', function () {
-                navbarMenu.classList.toggle('hidden');
-            });
-
-            const dropdownNavbarLink = document.getElementById('dropdownNavbarLink');
-            const dropdownNavbar = document.getElementById('dropdownNavbar');
-
-            dropdownNavbarLink.addEventListener('click', function () {
-                dropdownNavbar.classList.toggle('hidden');
-            });
-
-            // Sticky Navbar
-            window.onscroll = function () {
-                myFunction()
-            };
-
-            var navbar = document.getElementById("navbar-multi-level");
-
-            var sticky = navbar.offsetTop;
-
-            function myFunction() {
-                if (window.pageYOffset >= sticky) {
-                    navbar.classList.add("sticky")
-                } else {
-                    navbar.classList.remove("sticky");
-                }
+            // Memastikan nilai tidak kurang dari 1
+            if (!isNaN(value) && value > 1) {
+                input.value = value - 1; // Mengurangi nilai input
             }
-
-
-            document.querySelectorAll('.decrement-button').forEach(function(button) {
-            button.addEventListener('click', function() {
-                    var input = button.nextElementSibling;
-                    var value = parseInt(input.value);
-                    if (!isNaN(value) && value > 1) {
-                        input.value = value - 1;
-                    }
-                });
-            });
-
-            document.querySelectorAll('.increment-button').forEach(function(button) {
-            button.addEventListener('click', function() {
-                    var input = button.previousElementSibling;
-                    var value = parseInt(input.value);
-                    if (!isNaN(value)) {
-                        input.value = value + 1;
-                    } else {
-                        input.value = 1;
-                    }
-                });
-            });
         });
+    }
+
+    // Mengambil tombol increment berdasarkan ID
+    var incrementButton = document.getElementById('increment-button');
+    if (incrementButton) {
+        incrementButton.addEventListener('click', function() {
+            var input = incrementButton.previousElementSibling; // Mengambil input sebelum tombol increment
+            var value = parseInt(input.value); // Mengubah nilai input menjadi integer
+
+            // Menambah nilai input
+            if (!isNaN(value)) {
+                input.value = value + 1; // Menambah nilai input
+            } else {
+                input.value = 1; // Jika tidak valid, kembali ke nilai 1
+            }
+        });
+    }
+});
+
     </script>
 
 </body>
