@@ -69,13 +69,13 @@
                                     <div class="font-bold text-xl mb-2 whitespace-normal">{{ .Name }}</div>
                                 <!-- Jumlah -->
                                 <div class="relative flex items-center max-w-[8rem]">
-                                    <button type="button" id="decrement-button" class=" bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-md p-1 h-6 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none ">
+                                    <button type="button" class="decrement-button bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-md p-1 h-6 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none ">
                                         <svg class="w-2 h-2 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16"/>
                                         </svg>
                                     </button>
                                     <input type="text" value="1" name="jumlah" class="bg-gray-50 border-x-0 border-gray-300 h-6 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-5 py-1.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 quantity-input" required />
-                                    <button type="button" id="increment-button" class=" bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-md p-1 h-6 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none ">
+                                    <button type="button"  class="increment-button bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-md p-1 h-6 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none ">
                                         <svg class="w-2 h-2 text-gray-900 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
                                         </svg>
@@ -176,11 +176,11 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-    // Mengambil tombol decrement berdasarkan ID
-    var decrementButton = document.getElementById('decrement-button');
-    if (decrementButton) {
-        decrementButton.addEventListener('click', function() {
-            var input = decrementButton.nextElementSibling; // Mengambil input setelah tombol decrement
+    // Mengambil semua tombol decrement berdasarkan kelas
+    var decrementButtons = document.querySelectorAll('.decrement-button');
+    decrementButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            var input = button.nextElementSibling; // Mengambil input setelah tombol decrement
             var value = parseInt(input.value); // Mengubah nilai input menjadi integer
 
             // Memastikan nilai tidak kurang dari 1
@@ -188,13 +188,13 @@
                 input.value = value - 1; // Mengurangi nilai input
             }
         });
-    }
+    });
 
-    // Mengambil tombol increment berdasarkan ID
-    var incrementButton = document.getElementById('increment-button');
-    if (incrementButton) {
-        incrementButton.addEventListener('click', function() {
-            var input = incrementButton.previousElementSibling; // Mengambil input sebelum tombol increment
+    // Mengambil semua tombol increment berdasarkan kelas
+    var incrementButtons = document.querySelectorAll('.increment-button');
+    incrementButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            var input = button.previousElementSibling; // Mengambil input sebelum tombol increment
             var value = parseInt(input.value); // Mengubah nilai input menjadi integer
 
             // Menambah nilai input
@@ -204,7 +204,7 @@
                 input.value = 1; // Jika tidak valid, kembali ke nilai 1
             }
         });
-    }
+    });
 });
 
     </script>
